@@ -1,11 +1,11 @@
 <x-admin-master>
     @section('content') 
         <h1>All Subjects</h1>
-          @if(Session::has('message'))
-            <div class="alert alert-danger">{{Session::get('message')}}</div>
-            @elseif(session('created-post-message')) 
+          @if(Session::has('subject-delete'))
+            <div class="alert alert-danger">{{Session::get('subject-delete')}}</div>
+            @elseif(session('subject-create-message')) 
             <div class="alert alert-success">{{session('created-subject-message')}}</div> 
-            @elseif(session('post-updated-message'))
+            @elseif(session('subject-updated-message'))
             <div class="alert alert-success">{{session('subject-updated-message')}}</div>  
           @endif
         <div class="card shadow mb-4">
@@ -13,17 +13,17 @@
               <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
             </div>
             <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <div class="table-responsive-xl">
+                <table class="table table-bordered table-striped .table-hover" id="dataTable" width="100%" cellspacing="0">
                   <thead>
-                    <tr>
-                      <th>Id</th>
-                      <th>Tutor</th>
-                      <th>Subject</th>
-                      <th>Room</th>
+                    <tr class="">
+                      <th>@sortablelink('id' ,'ID')</th>
+                      <th>@sortablelink('users.name','Tutor')</th>
+                      <th>@sortablelink('subject','Subject')</th>
+                      <th>@sortablelink('room','Room')</th>
                       <th>Description</th>
-                      <th>Created At</th>
-                      <th>Updated At</th>
+                      <th>@sortablelink('created_at','Created At')</th>
+                      <th>@sortablelink('updated_at','Updated At')</th>
                       <th>Delete</th>
                     </tr>
                   </thead>
@@ -43,15 +43,16 @@
                     @foreach($subjects as $subject)
                     <tr>
                         <td>{{$subject->id}}</td>
-                        <td>{{$subject->user->name}}</td>
+                        <td>{{$subject->users->name}}</td>
                         <td><a href="{{route('subjects.edit' , $subject->id)}}">{{$subject->subject}}</a></td>
                         <td>{{$subject->room}}</td>
                         <td>
-                            <textarea name="description" id="description" cols="30" rows="10">{{$subject->description}}</textarea>
+                            <div>{{$subject->description}}</div>
                         </td>
                         <td>{{$subject->created_at->diffForHumans()}}</td>
                         <td>{{$subject->updated_at->diffForHumans()}}</td>
                         <td>
+                      
                         <form method="post" action="{{route('subjects.destroy' , $subject->id)}}" enctype="multipart/form-data">
                               @csrf 
                               @method('DELETE')
@@ -62,6 +63,11 @@
                     @endforeach
                 </tbody>
                 </table>
+                {{ $subjects->links() }}
+
+                <p>
+                  Displaying {{$subjects->count()}} of {{ $subjects->total() }} subject(s).
+                </p>
               </div>
             </div>
           </div>

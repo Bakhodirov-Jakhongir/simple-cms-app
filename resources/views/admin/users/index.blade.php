@@ -7,6 +7,7 @@
         @if(session('user-deleted'))
                     <div class="alert alert-danger">{{session('user-deleted')}}</div>
             @endif
+           
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">

@@ -5,7 +5,7 @@
                     <div class="alert alert-success">{{session('role-update')}}</div>
                 @endif
             <h2>Edit Role: {{$role->name}}</h2>
-            <form action="{{route('roles.update' , $role->id)}}" method="post">
+            <form action="{{route('roles.update' , $role->id)}}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-group">

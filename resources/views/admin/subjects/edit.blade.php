@@ -1,7 +1,7 @@
 <x-admin-master>
     @section('content')
-        <h1>Edit a Subject</h1>
-        <form method="POST" action="{{route('subjects.update' , $subject->id)}}" enctype="multipart/form-data">
+        <h1>Edit the {{$subject->subject}}</h1>
+        <form method="post" action="{{route('subjects.update' , $subject->id)}}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="form-group">

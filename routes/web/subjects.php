@@ -13,4 +13,5 @@ Route::get('/subjects/{subject}/edit' , [App\Http\Controllers\SubjectsController
 Route::patch('/subjects/{subject}/update' , [App\Http\Controllers\SubjectsController::class , 'update'])->name('subjects.update');
 
 Route::delete('/subjects/{subject}/destroy' , [App\Http\Controllers\SubjectsController::class , 'destroy'])->name('subjects.destroy');
+
 ?>

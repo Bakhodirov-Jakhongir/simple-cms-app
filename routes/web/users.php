@@ -6,7 +6,7 @@ Route::put('/users/{user}/update' , [App\Http\Controllers\UserController::class 
 
 Route::delete('/users/{user}/destroy',  [App\Http\Controllers\UserController::class , 'destroy'])->name('user.destroy');
 
-Route::middleware(['role:Admin' , 'auth'])->group(function(){
+//Route::middleware(['role:admin' , 'auth'])->group(function(){
 
     Route::get('/users' , [App\Http\Controllers\UserController::class , 'index'])->name('users.index');
 
@@ -14,7 +14,7 @@ Route::middleware(['role:Admin' , 'auth'])->group(function(){
 
     Route::put('/users/{user}/detach' , [App\Http\Controllers\UserController::class , 'detach'])->name('user.role.detach');
 
-});
+//});
 
 Route::middleware(['can:view,user'])->group(function(){
 

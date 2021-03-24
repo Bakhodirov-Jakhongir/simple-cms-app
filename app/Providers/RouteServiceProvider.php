@@ -88,14 +88,14 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapUsersRoutes() {
         Route::prefix('admin')
-            ->middleware(['web' , 'auth' , 'role:admin'])
+            ->middleware(['web' , 'auth' , 'role:Admin'])
             ->namespace($this->namespace)
             ->group(base_path('routes/web/users.php'));
     }
 
     protected function mapRolesRoutes() {
         Route::prefix('admin')
-            ->middleware(['web' , 'auth' , 'role:admin'])
+            ->middleware(['web' , 'auth' , 'role:Admin'])
             ->namespace($this->namespace)
             ->group(base_path('routes/web/roles.php'));
     }
